@@ -1,4 +1,12 @@
 {
   "nrf-connect.topdir": "c:\\Users\\micha_o8lgp\\ncs",
-  "nrf-connect.toolchain.path": "PATH"
+  "nrf-connect.toolchain.path": "PATH",
+  "files.associations": {
+    "log.h": "c",
+    "kernel.h": "c",
+    "printk.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c"
+  }
 }

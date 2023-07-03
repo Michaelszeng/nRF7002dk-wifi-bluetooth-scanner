@@ -2,24 +2,22 @@
 #include <stdlib.h>
 
 
+
 #define WIFI_SHELL_MODULE "wifi"
 
 // #define WIFI_SHELL_MGMT_EVENTS (NET_EVENT_WIFI_SCAN_RESULT | NET_EVENT_WIFI_SCAN_DONE)
 #define WIFI_SHELL_MGMT_EVENTS (NET_EVENT_WIFI_SCAN_DONE |		\
 								NET_EVENT_WIFI_RAW_SCAN_RESULT)
 
-// printing hexdump for wifi scans
-#define PRINT_INFO 1
-
 // decimal of FA 0B BC 0D
-static uint8_t identifier[] = {250, 11, 188, 13};
+uint8_t identifier[] = {250, 11, 188, 13};
 
-static uint8_t wifi_scan_finished;
+uint8_t wifi_scan_finished;
 
-static struct net_mgmt_event_callback wifi_shell_mgmt_cb;
+struct net_mgmt_event_callback wifi_shell_mgmt_cb;
 
 
-static int wifi_freq_to_channel(int frequency)
+int wifi_freq_to_channel(int frequency)
 {
 	int channel = 0;
 
@@ -43,7 +41,7 @@ static int wifi_freq_to_channel(int frequency)
 }
 
 
-static enum wifi_frequency_bands wifi_freq_to_band(int frequency)
+enum wifi_frequency_bands wifi_freq_to_band(int frequency)
 {
 	enum wifi_frequency_bands band = WIFI_FREQ_BAND_2_4_GHZ;
 
@@ -59,7 +57,7 @@ static enum wifi_frequency_bands wifi_freq_to_band(int frequency)
 }
 
 
-static void handle_wifi_scan_done(struct net_mgmt_event_callback *cb)
+void handle_wifi_scan_done(struct net_mgmt_event_callback *cb)
 {
 	const struct wifi_status *status =
 		(const struct wifi_status *)cb->info;
