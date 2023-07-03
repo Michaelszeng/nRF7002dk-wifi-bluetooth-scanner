@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 
-
 #define WIFI_SHELL_MODULE "wifi"
 
 // #define WIFI_SHELL_MGMT_EVENTS (NET_EVENT_WIFI_SCAN_RESULT | NET_EVENT_WIFI_SCAN_DONE)
@@ -17,8 +16,7 @@ uint8_t wifi_scan_finished;
 struct net_mgmt_event_callback wifi_shell_mgmt_cb;
 
 
-int wifi_freq_to_channel(int frequency)
-{
+int wifi_freq_to_channel(int frequency) {
 	int channel = 0;
 
 	if ((frequency <= 2424) && (frequency >= 2401)) {
@@ -41,8 +39,7 @@ int wifi_freq_to_channel(int frequency)
 }
 
 
-enum wifi_frequency_bands wifi_freq_to_band(int frequency)
-{
+enum wifi_frequency_bands wifi_freq_to_band(int frequency) {
 	enum wifi_frequency_bands band = WIFI_FREQ_BAND_2_4_GHZ;
 
 	if ((frequency  >= 2401) && (frequency <= 2495)) {
@@ -57,8 +54,7 @@ enum wifi_frequency_bands wifi_freq_to_band(int frequency)
 }
 
 
-void handle_wifi_scan_done(struct net_mgmt_event_callback *cb)
-{
+void handle_wifi_scan_done(struct net_mgmt_event_callback *cb) {
 	const struct wifi_status *status =
 		(const struct wifi_status *)cb->info;
 
@@ -72,8 +68,7 @@ void handle_wifi_scan_done(struct net_mgmt_event_callback *cb)
 
 
 static void wifi_mgmt_event_handler(struct net_mgmt_event_callback *cb,
-				     uint32_t mgmt_event, struct net_if *iface)
-{
+				     uint32_t mgmt_event, struct net_if *iface) {
 	switch (mgmt_event) {
 	case NET_EVENT_WIFI_RAW_SCAN_RESULT:
 		handle_wifi_raw_scan_result(cb);  // this func call is basically instantaneous
@@ -87,8 +82,7 @@ static void wifi_mgmt_event_handler(struct net_mgmt_event_callback *cb,
 }
 
 
-static int wifi_scan(void)
-{
+static int wifi_scan(void) {
 	wifi_scan_finished = 0;  // set global variable to indicate scanning currently in progresss
 	
 	struct net_if *iface = net_if_get_default();

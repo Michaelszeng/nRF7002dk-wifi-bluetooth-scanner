@@ -302,7 +302,7 @@ void log_hexdump(uint8_t* buf, uint16_t size) {
 			printk("0");
 		}
 		printk("%X ", buf[i]);
-		k_sleep(K_SECONDS(0.001));  // delay between each character so messages aren't dropped
+		k_sleep(K_SECONDS(0.002));  // delay between each character so messages aren't dropped
 	}
 	printk("\n");
 }
